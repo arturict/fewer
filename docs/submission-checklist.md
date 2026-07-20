@@ -24,7 +24,7 @@ Deadline: **Tuesday, July 21, 2026 at 5:00 PM Pacific Time** — Wednesday, July
 ## Repository
 
 - [x] Create the final GitHub repository
-- [ ] If public, verify anonymous clone and README flow
+- [x] If public, verify anonymous clone and README flow
 - [ ] If private, invite testing@devpost.com and build-week-event@openai.com
 - [x] Confirm default branch and CI are green
 

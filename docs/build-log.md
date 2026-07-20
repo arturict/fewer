@@ -84,12 +84,15 @@ Live release validation:
   `X-Frame-Options: DENY`.
 - Published the public source repository at <https://github.com/arturict/fewer>; the first GitHub
   Actions verification completed successfully.
+- Cloned that HTTPS URL into a fresh unauthenticated-style directory and completed the README
+  `npm run verify` and `npm run build` flow on Node 22.13.0; all 22 tests passed and the build
+  emitted exactly seven runtime files.
 - The deployment was published with the Vercel CLI. Automatic GitHub deployment is not connected
   because the Vercel GitHub integration does not currently have access to the newly created
   repository; this does not affect the verified production build.
 
-Remaining release gates: run the README flow from an anonymous clean clone, record and privately
-verify the under-three-minute demo video, and add the Codex `/feedback` session ID.
+Remaining release gates: record and privately verify the under-three-minute demo video, and add
+the Codex `/feedback` session ID.
 
 ## Submission session
 
