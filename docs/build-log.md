@@ -73,8 +73,23 @@ Final local browser validation:
   events, so a physical-keyboard pass remains manual rather than being claimed.
 - Browser console warnings/errors: none.
 
-Remaining live gate: deploy only the configured `dist/` output, then verify anonymously that app
-assets load and that repository files and response headers are not exposed.
+Live release validation:
+
+- Published the allowlisted `dist/` output at <https://fewer-gamma.vercel.app/>.
+- Verified the production page in a clean browser with the fictional sample portfolio, responsive
+  controls, and no console warnings or errors.
+- Verified anonymously that `/` and `/src/domain.js` load, while `/package.json`, `/README.md`,
+  `/docs/build-log.md`, and `/.git/config` return 404.
+- Verified production responses include the configured Content Security Policy and
+  `X-Frame-Options: DENY`.
+- Published the public source repository at <https://github.com/arturict/fewer>; the first GitHub
+  Actions verification completed successfully.
+- The deployment was published with the Vercel CLI. Automatic GitHub deployment is not connected
+  because the Vercel GitHub integration does not currently have access to the newly created
+  repository; this does not affect the verified production build.
+
+Remaining release gates: run the README flow from an anonymous clean clone, record and privately
+verify the under-three-minute demo video, and add the Codex `/feedback` session ID.
 
 ## Submission session
 

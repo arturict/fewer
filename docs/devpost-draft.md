@@ -82,7 +82,7 @@ general task manager, an autonomous project selector, or another notification fe
 
 ## Submission links
 
-- Source: pending public repository verification
-- Live project: pending clean-browser deployment verification
+- Source: <https://github.com/arturict/fewer>
+- Live project: <https://fewer-gamma.vercel.app/>
 - Demo video: pending public or unlisted playback verification
 - Codex `/feedback` session: pending; never substitute a local thread identifier

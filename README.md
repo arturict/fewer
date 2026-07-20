@@ -2,6 +2,8 @@
 
 **Fewer projects. More finished.**
 
+Live demo: <https://fewer-gamma.vercel.app/>
+
 Fewer is a local-first anti-backlog for solo builders. It does one uncomfortable job: makes every
 open project earn a place in a finite attention budget.
 

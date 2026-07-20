@@ -19,14 +19,14 @@ Deadline: **Tuesday, July 21, 2026 at 5:00 PM Pacific Time** — Wednesday, July
 - [x] Local automated tests
 - [x] Independent GPT-5.6 review recorded and accepted changes identified
 - [x] Local clean-browser cut, reload, import/export, mobile, reset, and console pass
-- [ ] Public deployment verified in a clean browser
+- [x] Public deployment verified in a clean browser
 
 ## Repository
 
-- [ ] Create the final GitHub repository
+- [x] Create the final GitHub repository
 - [ ] If public, verify anonymous clone and README flow
 - [ ] If private, invite testing@devpost.com and build-week-event@openai.com
-- [ ] Confirm default branch and CI are green
+- [x] Confirm default branch and CI are green
 
 ## Demo
 
@@ -40,7 +40,8 @@ Deadline: **Tuesday, July 21, 2026 at 5:00 PM Pacific Time** — Wednesday, July
 
 - [ ] Start the draft submission
 - [x] Draft name, tagline, category, description, and build story in `devpost-draft.md`
-- [ ] Add verified technologies, repo, deployment, and video URLs
+- [ ] Add verified technologies, repo, deployment, and video URLs (repo and deployment verified;
+  video pending)
 - [ ] Add /feedback Codex session ID for the majority of the core build
 - [ ] Add teammates only if applicable and verify accepted invitations
 - [ ] Submit only after a final clean-browser and clean-clone rehearsal
