@@ -1,0 +1,17 @@
+{
+  "name": "Fewer",
+  "short_name": "Fewer",
+  "description": "Choose one project to finish and make an honest decision about the rest.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f0e8",
+  "theme_color": "#191815",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

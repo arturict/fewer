@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Fewer logo</title>
+  <rect width="512" height="512" rx="112" fill="#191815"/>
+  <path d="M126 131h260v58H188v67h166v58H188v117h-62V131Z" fill="#f3f0e8"/>
+  <circle cx="368" cy="400" r="32" fill="#ec5b3f"/>
+</svg>

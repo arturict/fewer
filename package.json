@@ -1,0 +1,19 @@
+{
+  "name": "fewer-projects",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local-first portfolio cut for solo builders.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "scan": "node scripts/scan-workspace.mjs",
+    "test": "node --test",
+    "lint": "node --check src/app.js && node --check src/domain.js && node --check src/storage.js && node --check scripts/build.mjs && node --check scripts/scan-workspace.mjs && node --check scripts/serve.mjs",
+    "verify": "npm run lint && npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}

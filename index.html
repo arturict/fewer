@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Fewer is a local-first decision tool that helps solo builders choose one project to finish."
+    />
+    <meta name="theme-color" content="#191815" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'"
+    />
+    <title>Fewer — finish one thing</title>
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="./" aria-label="Fewer home">
+        <span aria-hidden="true">Fewer</span><span class="wordmark-dot" aria-hidden="true">.</span>
+      </a>
+      <div class="header-actions">
+        <span class="local-badge" title="No account, analytics, or network sync">
+          <span class="status-dot" aria-hidden="true"></span>
+          Local only
+        </span>
+        <button class="button button-quiet" id="import-button" type="button">Import</button>
+        <button class="button button-quiet" id="export-button" type="button">Export</button>
+        <button class="button button-dark" id="add-button" type="button">Add project</button>
+      </div>
+    </header>
+
+    <main id="workspace">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">An anti-backlog for solo builders</p>
+        <div class="intro-grid">
+          <h1 id="page-title">Finish more.<br />Carry less.</h1>
+          <div class="intro-copy">
+            <p>
+              Starting got cheap. Attention did not. Fewer makes you fund one real finish line,
+              give one project maintenance, and make an honest call on everything else.
+            </p>
+            <button class="text-link" id="how-it-works-button" type="button">
+              Why only one?
+              <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="focus-shell" aria-labelledby="focus-title">
+        <div class="focus-heading">
+          <div>
+            <p class="eyebrow">This week's attention</p>
+            <h2 id="focus-title">One finish line</h2>
+          </div>
+          <button class="button button-accent" id="run-cut-button" type="button">
+            Run the cut
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div id="active-empty" class="focus-empty">
+          <p class="focus-empty-mark" aria-hidden="true">01</p>
+          <div>
+            <h3>No project is funded yet.</h3>
+            <p>Put the candidates head to head. The winner gets your next seven days.</p>
+          </div>
+        </div>
+
+        <article id="active-project" class="active-project" hidden>
+          <div class="active-main">
+            <div class="active-meta">
+              <span class="lane-label lane-active">Active</span>
+              <span id="active-hours"></span>
+            </div>
+            <h3 id="active-name"></h3>
+            <p id="active-why" class="active-why"></p>
+          </div>
+          <div class="proof-card">
+            <p class="eyebrow">Next observable proof</p>
+            <p id="active-proof" class="proof-text"></p>
+            <div class="proof-actions">
+              <button class="button button-light" id="proof-shipped-button" type="button">
+                Mark proof shipped
+              </button>
+              <button class="icon-button" id="edit-active-button" type="button" aria-label="Edit active project">
+                Edit
+              </button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="portfolio-section" aria-labelledby="portfolio-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Portfolio</p>
+            <h2 id="portfolio-title">Every project needs a decision.</h2>
+          </div>
+          <p id="portfolio-summary" class="summary-line"></p>
+        </div>
+
+        <div class="lane" data-lane="maintenance">
+          <div class="lane-heading">
+            <div>
+              <span class="lane-index">02</span>
+              <h3>Maintenance</h3>
+            </div>
+            <p>Keep healthy. Do not expand.</p>
+          </div>
+          <div class="project-grid" id="maintenance-list"></div>
+          <p class="lane-empty" id="maintenance-empty">The maintenance slot is optional.</p>
+        </div>
+
+        <div class="lane" data-lane="candidate">
+          <div class="lane-heading">
+            <div>
+              <span class="lane-index">—</span>
+              <h3>Undecided</h3>
+            </div>
+            <p>These projects still consume attention.</p>
+          </div>
+          <div class="project-grid" id="candidate-list"></div>
+          <p class="lane-empty" id="candidate-empty">Nothing is waiting for a decision.</p>
+        </div>
+
+        <div class="lane" data-lane="parked">
+          <div class="lane-heading">
+            <div>
+              <span class="lane-index">03</span>
+              <h3>Parked</h3>
+            </div>
+            <p>Return only when the trigger is true.</p>
+          </div>
+          <div class="project-grid" id="parked-list"></div>
+          <p class="lane-empty" id="parked-empty">No project is parked.</p>
+        </div>
+
+        <details class="closed-drawer">
+          <summary>
+            <span>
+              <span class="lane-index">×</span>
+              Closed projects
+            </span>
+            <span id="closed-count">0</span>
+          </summary>
+          <div class="project-grid" id="closed-list"></div>
+          <p class="lane-empty" id="closed-empty">Clean endings will appear here.</p>
+        </details>
+      </section>
+
+      <section class="principles" aria-labelledby="principles-title">
+        <p class="eyebrow">The rules</p>
+        <h2 id="principles-title">A smaller system with sharper edges.</h2>
+        <ol class="principle-grid">
+          <li>
+            <span>01</span>
+            <h3>Proof over motion</h3>
+            <p>Every active project names the next thing another person could actually observe.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>One active bet</h3>
+            <p>More capacity creates better work. It does not create more human attention.</p>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>Parking has a trigger</h3>
+            <p>“Later” is not a state. Say what must become true before a project returns.</p>
+          </li>
+          <li>
+            <span>04</span>
+            <h3>Closing keeps the lesson</h3>
+            <p>Archive the project without throwing away the insight that made it worth trying.</p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Fewer stores everything in this browser. No account. No analytics. No sync.</p>
+      <button class="text-link" id="reset-demo-button" type="button">Reset sample portfolio</button>
+    </footer>
+
+    <input id="import-input" type="file" accept="application/json,.json" hidden />
+
+    <dialog id="project-dialog" class="dialog">
+      <form id="project-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Project card</p>
+            <h2 id="project-dialog-title">Add a project</h2>
+          </div>
+          <button class="dialog-close" value="cancel" aria-label="Close project form" type="submit">×</button>
+        </div>
+        <input id="project-id" name="id" type="hidden" />
+        <label>
+          <span>Name</span>
+          <input id="project-name" name="name" required maxlength="80" autocomplete="off" />
+        </label>
+        <label>
+          <span>Why should this exist?</span>
+          <textarea id="project-why" name="why" required maxlength="320" rows="3"></textarea>
+        </label>
+        <label>
+          <span>Next observable proof</span>
+          <textarea id="project-proof" name="nextProof" required maxlength="240" rows="2"></textarea>
+          <small>Not “work on onboarding” — name what a real person can see or do.</small>
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Weekly hours</span>
+            <input id="project-hours" name="weeklyHours" type="number" required min="1" max="80" value="8" />
+          </label>
+          <label>
+            <span>Deadline</span>
+            <input id="project-deadline" name="deadline" type="date" />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>
+            <span>External signal</span>
+            <select id="project-signal" name="signal">
+              <option value="0">None yet</option>
+              <option value="1">Anecdotal</option>
+              <option value="2">Repeated</option>
+              <option value="3">Committed user</option>
+            </select>
+          </label>
+          <label>
+            <span>Momentum</span>
+            <select id="project-momentum" name="momentum">
+              <option value="0">Cold</option>
+              <option value="1">Some work</option>
+              <option value="2">Working core</option>
+              <option value="3">Shipping now</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          <span>Evidence note</span>
+          <input
+            id="project-evidence"
+            name="evidence"
+            maxlength="180"
+            placeholder="3 interviews booked · core flow tested"
+          />
+        </label>
+        <div class="dialog-actions">
+          <button class="button button-quiet" value="cancel" type="submit">Cancel</button>
+          <button class="button button-dark" id="save-project-button" value="default" type="submit">
+            Save project
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="cut-dialog" class="dialog dialog-wide">
+      <div id="cut-content"></div>
+    </dialog>
+
+    <dialog id="close-dialog" class="dialog">
+      <form id="close-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Clean ending</p>
+            <h2>Close <span id="close-project-name"></span></h2>
+          </div>
+          <button class="dialog-close" value="cancel" aria-label="Cancel closing project" type="submit">×</button>
+        </div>
+        <input id="close-project-id" name="id" type="hidden" />
+        <label>
+          <span>What is worth keeping?</span>
+          <textarea id="close-lesson" name="lesson" required maxlength="320" rows="4"></textarea>
+          <small>The project can end without making the learning disappear.</small>
+        </label>
+        <div class="dialog-actions">
+          <button class="button button-quiet" value="cancel" type="submit">Keep project</button>
+          <button class="button button-danger" value="default" type="submit">Close cleanly</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="why-dialog" class="dialog">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Design choice</p>
+          <h2>Why one active project?</h2>
+        </div>
+        <button class="dialog-close" id="close-why-button" aria-label="Close explanation" type="button">×</button>
+      </div>
+      <p class="dialog-copy">
+        Agents made starting and parallel execution dramatically cheaper. They did not make product
+        judgment, review, or attention parallel. Fewer reserves one slot for the bet that deserves
+        those scarce things, and one maintenance slot for obligations that cannot stop.
+      </p>
+      <p class="dialog-copy">
+        The app never auto-selects the winner. It surfaces evidence and makes the trade-off visible;
+        the decision stays yours.
+      </p>
+    </dialog>
+
+    <dialog id="reset-dialog" class="dialog">
+      <form id="reset-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Start over</p>
+            <h2>Restore the sample portfolio?</h2>
+          </div>
+          <button class="dialog-close" value="cancel" aria-label="Cancel reset" type="submit">×</button>
+        </div>
+        <p class="dialog-copy">
+          This replaces the portfolio stored in this browser. Export first if you want to keep it.
+        </p>
+        <div class="dialog-actions">
+          <button class="button button-quiet" value="cancel" type="submit">Keep my portfolio</button>
+          <button class="button button-danger" value="default" type="submit">Restore sample</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="project-card-template">
+      <article class="project-card">
+        <div class="card-topline">
+          <span class="card-status"></span>
+          <button class="card-menu" type="button" aria-label="Edit project">Edit</button>
+        </div>
+        <h4 class="card-name"></h4>
+        <p class="card-why"></p>
+        <div class="card-proof">
+          <span>Next proof</span>
+          <p></p>
+        </div>
+        <div class="card-evidence"></div>
+        <div class="card-footer">
+          <span class="card-date"></span>
+          <button class="card-close" type="button">Close</button>
+        </div>
+      </article>
+    </template>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>
